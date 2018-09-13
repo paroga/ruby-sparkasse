@@ -46,7 +46,7 @@ class Sparkasse
 
     acountId = item[:id]
 
-    result = api("transactions?pageSize=100&suggest=true&id=#{acountId}")
+    result = api("transactions?pageSize=5000&suggest=true&id=#{acountId}")
 
     items = []
     result[:collection].each do |item|
