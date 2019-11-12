@@ -24,8 +24,7 @@ class Sparkasse
     saltCode = loginForm.field_with(:name => 'saltCode').value
 
     rsa = OpenSSL::PKey::RSA.new
-    rsa.e = OpenSSL::BN.new(exponent.to_i(16))
-    rsa.n = OpenSSL::BN.new(modulus.to_i(16))
+    rsa.set_key(OpenSSL::BN.new(modulus.to_i(16)), OpenSSL::BN.new(exponent.to_i(16)), nil)
     encrypted = rsa.public_encrypt("#{saltCode}\t#{password}")
     rsaEncrypted = encrypted.unpack("H*").join.upcase
 
